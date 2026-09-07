@@ -1,8 +1,7 @@
 <?php
 /**
- * Filter which redirects potential private user after adding special location.
+ * Page which redirects potential private user after adding special location.
  * 
- * Always included in functions.php
  * 
  * @package LOOPIS_Theme
  * @subpackage Frontend
@@ -11,16 +10,16 @@
 $code = isset($_GET['spt']) ? (string) $_GET['spt'] : '';
 $code = preg_replace('/[^A-Za-z0-9_-]/', '', $code);
 if ($code === '') {
-    wp_safe_redirect(home_url('/'));
+    wp_safe_redirect(home_url('/start/'));
     exit;
 }
 $expected_hash = get_option('special_invite_hash', '');
 if (!$expected_hash) {
-    wp_safe_redirect(home_url('/'));
+    wp_safe_redirect(home_url('/start/'));
     exit;
 }
 if (!hash_equals($expected_hash, hash('sha256', $code))) {
-    wp_safe_redirect(home_url('/'));
+    wp_safe_redirect(home_url('/start/'));
     exit;
 }
 
