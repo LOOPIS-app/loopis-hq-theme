@@ -119,7 +119,7 @@
 	<header id="header">
 		<div class="group">
 			<div class="header-back" onclick="history.back()"><i class="fas fa-chevron-left"></i></div>
-			<a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php echo LOOPIS_THEME_HQ_URI; ?>/assets/img/LOOPIS_logo.png" alt="LOOPIS-logo" id="header-img"></a>
+			<a href="<?php echo esc_url(home_url('/start/')); ?>"><img src="<?php echo LOOPIS_THEME_HQ_URI; ?>/assets/img/LOOPIS_logo.png" alt="LOOPIS-logo" id="header-img"></a>
 				<?php if (is_user_logged_in()) : ?>
 				<div class="header-faq" onclick="location.href='<?php echo esc_url( home_url('/12845/') ); ?>'">📍</div>
 				<?php endif; ?>

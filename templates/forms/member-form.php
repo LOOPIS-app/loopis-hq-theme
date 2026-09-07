@@ -25,6 +25,30 @@ $wpum_area = get_user_meta($user_id, 'wpum_area', true);
 $wpum_active = get_user_meta($user_id, 'wpum_active', true);
 $wpum_active_checked = in_array((string) $wpum_active, array('1', 'true', 'yes', 'on'), true);
 
+// blog handlers
+loopis_theme_hq_include_folder('functions/user-extra', LOOPIS_THEME_HQ_DIR);
+$primary_blog = get_user_meta($user_id, 'primary_blog', true);
+$user_blogs = get_blogs_of_user( $user_id );
+$all_blogs = get_area_privacy();
+
+if(count($user_blogs)>2){
+    $give_blog_choice = true;
+    $choices = [];
+    foreach($user_blogs as $blog){
+        if($blog->userblog_id === 1){
+            continue;
+        }else{
+            if(!empty($all_blogs[$blog->userblog_id])){
+                $choices[] = array('blog_id'=>$blog->userblog_id,
+                    'name'=>$all_blogs[$blog->userblog_id]['name']
+                );
+            }
+        }
+    }
+}else{
+    $give_blog_choice = false;
+}
+
 // Status from handler redirect after submit.
 $member_form_status = sanitize_key(wp_unslash($_GET['member_form'] ?? ''));
 $member_form_fields_raw = sanitize_text_field(wp_unslash($_GET['member_form_fields'] ?? ''));
@@ -180,6 +204,7 @@ if ('success' === $member_form_status) : ?>
                 <option value="secret" <?php selected($wpum_gender, 'secret'); ?>>Vill ej ange</option>
             </select>
         </div>
+
 
         <div>
             <label for="member-area">Område</label>
