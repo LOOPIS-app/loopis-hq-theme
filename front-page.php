@@ -1,65 +1,39 @@
 <?php
 /**
- * LOOPIS main site front page
- * 
- * Displays user options + list available areas.
+ * Redirect logged-in users to their primary blog.
+ * Users without a valid primary blog go to /start/.
  */
 
-get_header(); ?>
+if (
+    wp_doing_ajax()
+    || ( defined( 'REST_REQUEST' ) && REST_REQUEST )
+    || ( defined( 'DOING_CRON' ) && DOING_CRON )
+) {
+    return;
+}
 
-<div class="page-padding center">
+if ( ! is_user_logged_in() ) {
+    wp_safe_redirect( get_home_url( 1, '/start/' ) );
+    exit;
+}
 
-    <?php 
-    // Get current user and roles
-    $user_id = get_current_user_id();
-    $user = wp_get_current_user();
-    $user_roles = (array) $user->roles;
-    $user_firstname = $user->first_name;
+$user_id          = get_current_user_id();
+$primary_blog_id  = (int) get_user_meta( $user_id, 'primary_blog', true );
 
-    // Check member data and payment for member_pending
-    if (in_array('member_pending', $user_roles, true))  {
-        include LOOPIS_THEME_HQ_DIR . '/includes/functions/user-extra/member-pending-check.php'; 
-        $user_id = get_current_user_id();
-        $member_status = member_pending_check($user_id);
-        }
-    
-    // Greeting and options for users and visitors
-    include LOOPIS_THEME_HQ_DIR . '/includes/output/access/role-greeting-main.php';
-    include LOOPIS_THEME_HQ_DIR . '/includes/output/access/role-options-main.php';
+// The main site is not allowed to be a primary blog.
+$has_valid_primary_blog =
+    $primary_blog_id > 1
+    && is_user_member_of_blog( $user_id, $primary_blog_id );
 
-    // Show list of areas
-        wp_reset_postdata();        
-        $args = array(
-            'post_type'      => 'post',
-            'posts_per_page' => 50,
-            'order'          => 'ASC',
-            'orderby'        => 'date',
-        );
+if ( ! $has_valid_primary_blog ) {
+    wp_safe_redirect( get_home_url( 1, '/start/' ) );
+    exit;
+}
 
-        $the_query = new WP_Query($args);
-        $count_total = 0;
-        ?>
+// Avoid redirecting repeatedly when already on the primary blog.
+if ( get_current_blog_id() === $primary_blog_id ) {
+    return;
+}
 
-        <!-- List header -->
-        <div class="columns">
-            <div class="column1"><h3>📍 Områden</h3></div>
-            <div class="column2"></div>
-        </div>
-        <hr>
-
-        <!-- Posts output -->
-        <div class="post-list">
-            <?php if ($the_query->have_posts()) : ?>
-                <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-                    <?php get_template_part('templates/post-list/area-posts'); ?>
-                <?php endwhile; ?>
-        </div><!--post-list-->
-        <?php endif; ?>
-
-        <?php wp_reset_postdata();
-
-?>
-
-</div><!--page-padding center-->
-
-<?php get_footer(); ?>
+wp_safe_redirect( get_home_url( $primary_blog_id, '/' ) );
+exit;

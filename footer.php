@@ -10,7 +10,7 @@
 
 <footer id="footer">
     <nav>
-            <a href="<?php echo home_url('/'); ?>" class="footer-item">
+            <a href="<?php echo home_url('/start/'); ?>" class="footer-item">
                 <span class="emoji">🗺</span>
                 <span class="text">Start</span>
             </a>

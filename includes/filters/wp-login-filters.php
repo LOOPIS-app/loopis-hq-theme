@@ -59,7 +59,7 @@ add_action('login_enqueue_scripts', 'loopis_theme_hq_login_assets');
 
 // Set logo link target on login page.
 function loopis_theme_hq_login_headerurl() {
-    return home_url('/');
+    return home_url('/start/');
 }
 add_filter('login_headerurl', 'loopis_theme_hq_login_headerurl');
 
@@ -81,7 +81,7 @@ function loopis_theme_hq_login_redirect($redirect_to, $requested_redirect_to, $u
         return $requested_redirect_to;
     }
 
-    return home_url('/');
+    return home_url('/start/');
 }
 add_filter('login_redirect', 'loopis_theme_hq_login_redirect', 10, 3);
 

@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 <header id="header">
     <div class="group">
         <div class="header-back" onclick="history.back()"><i class="fas fa-chevron-left" aria-hidden="true"></i></div>
-        <a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php echo LOOPIS_THEME_HQ_URI; ?>/assets/img/LOOPIS_logo.png" alt="LOOPIS-logo" id="header-img"></a>
+        <a href="<?php echo esc_url(home_url('/start/')); ?>"><img src="<?php echo LOOPIS_THEME_HQ_URI; ?>/assets/img/LOOPIS_logo.png" alt="LOOPIS-logo" id="header-img"></a>
         <div class="header-faq" onclick="location.href='<?php echo esc_url(home_url('/faq/')); ?>'">💡</div>
     </div>
 </header>
