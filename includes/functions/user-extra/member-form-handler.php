@@ -40,7 +40,7 @@ function loopis_theme_hq_handle_member_form_post() {
     $phone_raw = sanitize_text_field(wp_unslash($_POST['wpum_phone'] ?? ''));
     $birthyear_raw = sanitize_text_field(wp_unslash($_POST['wpum_birthyear'] ?? ''));
     $gender = sanitize_key(wp_unslash($_POST['wpum_gender'] ?? ''));
-    $area = sanitize_key(wp_unslash($_POST['area'] ?? ''));
+    $area = sanitize_key(wp_unslash($_POST['wpum_area'] ?? ''));
     
     $active = isset($_POST['wpum_active']) ? 'true' : 'false';
 
