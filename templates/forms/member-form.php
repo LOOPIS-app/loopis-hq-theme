@@ -21,7 +21,6 @@ $wpum_postcode = get_user_meta($user_id, 'wpum_postcode', true);
 $wpum_phone = get_user_meta($user_id, 'wpum_phone', true);
 $wpum_birthyear = get_user_meta($user_id, 'wpum_birthyear', true);
 $wpum_gender = get_user_meta($user_id, 'wpum_gender', true);
-$wpum_area = get_user_meta($user_id, 'wpum_area', true);
 $wpum_active = get_user_meta($user_id, 'wpum_active', true);
 $wpum_active_checked = in_array((string) $wpum_active, array('1', 'true', 'yes', 'on'), true);
 
@@ -71,7 +70,6 @@ $member_form_field_messages = array(
     'wpum_phone' => 'Ange 10 siffror, bindestreck valfritt.',
     'wpum_birthyear' => 'Ange 4 siffror.',
     'wpum_gender' => 'Välj ett alternativ i listan.',
-    'wpum_area' => 'Välj ett alternativ i listan.',
     'general' => 'Formuläret kunde inte verifieras. Försök igen.',
 );
 
@@ -79,7 +77,6 @@ $postcode_digits = preg_replace('/\D+/', '', (string) $wpum_postcode);
 $phone_digits = preg_replace('/\D+/', '', (string) $wpum_phone);
 $birthyear_digits = preg_replace('/\D+/', '', (string) $wpum_birthyear);
 $allowed_genders = array('female', 'male', 'nonbinary', 'other', 'secret');
-$allowed_areas = array('1', '2', '3', '4', '5', 'other');
 $current_year = (int) wp_date('Y');
 
 // Derive invalid fields from currently stored values.
@@ -102,10 +99,6 @@ if (!(bool) preg_match('/^\d{4}$/', $birthyear_digits)
 
 if (!in_array((string) $wpum_gender, $allowed_genders, true)) {
     $member_form_current_invalid_fields[] = 'wpum_gender';
-}
-
-if (!in_array((string) $wpum_area, $allowed_areas, true)) {
-    $member_form_current_invalid_fields[] = 'wpum_area';
 }
 
 if (empty($member_form_fields)) {
