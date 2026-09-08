@@ -1,6 +1,6 @@
 <?php
 /**
- * Template for displaying LOOPIS user tab content.
+ * Tab showing summary of user activity
  */
 
 // Exit if accessed directly
