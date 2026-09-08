@@ -21,7 +21,7 @@ $user = wp_get_current_user();
 <div class="wrapped">
 <p>👤 Användarnamn: <b><?php echo $user->user_login ?></b></p>
 <p>✉ E-post: <b><?php echo antispambot($user->user_email); ?></b></p>
-<p>📱 Mobilnummer: <b><span class="unclickable"><?php echo antispambot($user->wpum_phone); ?></span></b></p>
+<p>📱 Mobilnummer: <b><?php echo antispambot($user->wpum_phone); ?></b></p>
 </div>
 
 <p><span class="big-link"><a href="<?php echo esc_url(home_url('/user/?view=member-data')); ?>">🖊 Medlemsregister</a></span></p>
