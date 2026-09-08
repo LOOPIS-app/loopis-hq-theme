@@ -205,23 +205,6 @@ if ('success' === $member_form_status) : ?>
             </select>
         </div>
 
-
-        <div>
-            <label for="member-area">Område</label>
-            <?php if (in_array('wpum_area', $member_form_fields, true)) : ?>
-                <p class="error"><?php echo esc_html($member_form_field_messages['wpum_area']); ?></p>
-            <?php endif; ?>
-            <select id="member-area" name="wpum_area" required>
-                <option value="">Välj</option>
-                <option value="1" <?php selected($wpum_area, '1'); ?>>Bagarmossen</option>
-                <option value="2" <?php selected($wpum_area, '2'); ?>>Skarpnäck</option>
-                <option value="3" <?php selected($wpum_area, '3'); ?>>Kärrtorp</option>
-                <option value="4" <?php selected($wpum_area, '4'); ?>>Björkhagen</option>
-                <option value="5" <?php selected($wpum_area, '5'); ?>>Enskede</option>
-                <option value="other" <?php selected($wpum_area, 'other'); ?>>Annat</option>
-            </select>
-        </div>
-
         <div>
             <label for="member-active">Aktivera medlemskap</label>
             <input
