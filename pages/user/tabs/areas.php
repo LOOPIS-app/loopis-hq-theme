@@ -15,7 +15,7 @@ $user = wp_get_current_user();
 
 <h3>📍 Mina områden</h3>
 <hr>
-<p class="small">💡 Områden där du är medlem.</p>
+<p class="small">💡 Områden där du kan loopa.</p>
 
 <?php
         wp_reset_postdata();        
