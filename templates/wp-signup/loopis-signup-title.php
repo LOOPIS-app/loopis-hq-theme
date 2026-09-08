@@ -30,5 +30,4 @@ if (empty($_COOKIE['special_invite_payload'])) { ?>
 <?php } ?>
 
 <!-- FAQ -->
-<p><span class="big-link"><a href="<?php echo esc_url(home_url('/faq/varfor-medlemskap/')); ?>">📌 Varför måste jag vara medlem?</a></span></p>
-<p><span class="big-link"><a href="<?php echo esc_url(home_url('/faq/loopis-stadgar/')); ?>">📜 Stadgar</a></span>&nbsp; <span class="big-link"><a href="<?php echo esc_url(home_url('/privacy/')); ?>">🗄 Integritet</a></span></p>
+<p><span class="big-link"><a href="<?php echo esc_url(home_url('/faq/varfor-medlemskap/')); ?>">📌 Varför medlemskap?</a></span>&nbsp; <span class="big-link"><a href="<?php echo esc_url(home_url('/faq/loopis-stadgar/')); ?>">📜 Stadgar</a></span>&nbsp; <span class="big-link"><a href="<?php echo esc_url(home_url('/privacy/')); ?>">🗄 Integritet</a></span></p>
