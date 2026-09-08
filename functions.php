@@ -1,8 +1,6 @@
 <?php
 /**
- * Theme bootstrap for LOOPIS HQ (main site)
- *
- * Loads all frontend core files.
+ * Theme bootstrap for LOOPIS main site (aka. HQ)
  */
 
 // Prevent direct access
@@ -12,9 +10,7 @@ if (!defined('ABSPATH')) { exit; }
 if (defined('LOOPIS_MAINTENANCE') && LOOPIS_MAINTENANCE) { require_once __DIR__ . '/includes/maintenance/maintenance.php'; }
 
 // Define theme version
-define('LOOPIS_THEME_HQ_VERSION', '1.04'); // Update version number here + in style.css
-
-// Theme folder constants are provided by MU plugin "LOOPIS Constants".
+define('LOOPIS_THEME_HQ_VERSION', '1.05'); // Update version number here + in style.css
 
 /**
  * Load theme translations.
@@ -65,11 +61,12 @@ function loopis_theme_hq_include_folder($folder_name, $base_theme_dir = LOOPIS_T
     }
 }
 
-// Define folders to load (shared from LOOPIS Theme)
+// Define folders to load
 function loopis_theme_hq_load_files() {
     // For everyone
     loopis_theme_hq_include_folder('filters', LOOPIS_THEME_DIR);
     loopis_theme_hq_include_folder('functions/everyone', LOOPIS_THEME_DIR);
+
     // HQ-only additions
     loopis_theme_hq_include_folder('filters', LOOPIS_THEME_HQ_DIR);
     loopis_theme_hq_include_folder('functions/payment', LOOPIS_THEME_HQ_DIR);
