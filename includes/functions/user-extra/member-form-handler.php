@@ -81,6 +81,9 @@ function loopis_theme_hq_handle_member_form_post() {
         // Persist fields that passed validation to avoid unnecessary refilling.
         if ($is_valid_postcode) {
             update_user_meta($user_id, 'wpum_postcode', $postcode);
+            if(function_exists('loopis_get_city')){
+                update_user_meta($user_id, 'wpum_postarea', loopis_get_city($postcode));
+            }
         }
 
         if ($is_valid_phone) {
@@ -113,6 +116,9 @@ function loopis_theme_hq_handle_member_form_post() {
     update_user_meta($user_id, 'wpum_birthyear', $birthyear);
     update_user_meta($user_id, 'wpum_gender', $gender);
     update_user_meta($user_id, 'wpum_active', $active);
+    if(function_exists('loopis_get_city')){
+        update_user_meta($user_id, 'wpum_postarea', loopis_get_city($postcode));
+    }
     // Check if both member data and membership payment are complete.
     if(!function_exists('member_pending_check')) {
         include LOOPIS_THEME_HQ_DIR . '/includes/functions/user-extra/member-pending-check.php';
