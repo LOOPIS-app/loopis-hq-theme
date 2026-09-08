@@ -12,7 +12,7 @@ $faq_terms = get_the_terms(get_the_ID(), 'faq-tag');
 ?>
 
 <div class="page-padding center">
-    <p><span class="rounded"><a href="<?php echo get_post_type_archive_link('faq'); ?>">💡 Frågor & Svar</a></span>
+    <p><span class="rounded"><a href="<?php echo get_post_type_archive_link('faq'); ?>">💡 Vanliga frågor</a></span>
     <?php
     if (!empty($faq_terms) && !is_wp_error($faq_terms)) {
         foreach ($faq_terms as $faq_term) {
@@ -21,7 +21,7 @@ $faq_terms = get_the_terms(get_the_ID(), 'faq-tag');
     }
     ?>
     <div class="faq-post-wrapper">
-        <div class="post-content">
+        <div class="faq-post-content">
         <?php the_content(); ?>
         </div>
     </div>

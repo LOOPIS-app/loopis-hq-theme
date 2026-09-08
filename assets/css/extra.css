@@ -8,3 +8,5 @@
 .faq-post-wrapper { margin-bottom: 30px; } 
 .faq-post-wrapper a { font-size: 16px; padding:5px; background: #f5f5f5; }
 .faq-post-wrapper a:hover { background:  #ebebeb; }
+.faq-post-content span { font-size: 16px; padding:5px; background: #f5f5f5; }
+.faq-post-content span.post-label { background: #f5f5f5; }

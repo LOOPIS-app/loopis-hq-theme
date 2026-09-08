@@ -1,5 +1,9 @@
 # 📋 Changelog for "LOOPIS Theme HQ"
 
+## 1.05 (2026-09-08)
+- Multisite fixes & general improvements
+- Signup flow improved (including special signup)
+
 ## 1.04 (2026-08-26)
 - Minor revision to sync with "LOOPIS Theme"
 

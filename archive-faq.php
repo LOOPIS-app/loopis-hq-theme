@@ -76,10 +76,16 @@ endif;
 <?php if ( is_user_logged_in() ) : ?>
 <h3>För medlemmar</h3>
 <hr>
-<p><span class="big-link"><a href="https://drive.google.com/drive/folders/1l1B43flky-zXgQ2wFD24s_32N_pfWHvd?usp=drive_link"><i class="fas fa-share"></i> Föreningens protokoll</a></span> på Google Drive</p>
-<p><span class="big-link"><a href="https://www.facebook.com/groups/loopis" target="_blank" rel="noreferrer noopener"><i class="fas fa-share"></i> Facebook-grupp</a></span> för frågor och diskussion</p>
-<p><span class="big-link"><a href="https://discord.com/channels/1480883243740954626/1480883244449927231" target="_blank" rel="noreferrer noopener"><i class="fas fa-share"></i> Discord-server</a></span> för frågor och diskussion</p>
+<p><span class="big-link"><i class="fab fa-discord"></i> <a href="https://discord.com/channels/1480883243740954626/1480883244449927231" target="_blank" rel="noreferrer noopener">Discord-server</a></span> för frågor, diskussion, volontärarbete och årsmöten</p>
+<p><span class="big-link"><i class="fab fa-google-drive"></i> <a href="https://drive.google.com/drive/folders/1l1B43flky-zXgQ2wFD24s_32N_pfWHvd?usp=drive_link">Föreningens protokoll</a></span> på Google Drive</p>
+<!--p><span class="big-link"><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/groups/loopis" target="_blank" rel="noreferrer noopener">Facebook-grupp</a></span> för frågor och diskussion</p-->
 <?php endif; ?>
+
+<h3>Sociala medier</h3>
+<hr>
+<p><span class="big-link"><i class="fab fa-facebook-square"></i> <a href="https://www.facebook.com/loopis.org">Facebook</a></span>&nbsp;
+<span class="big-link"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/loopis_org">Instagram</a></span>&nbsp;
+<span class="big-link"><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/company/loopis/">Linkedin</a></span></p>
 
 <div style="height:25px" aria-hidden="true" class="wp-block-spacer"></div>
 
