@@ -1,8 +1,6 @@
 <?php
 /**
- * Template for displaying LOOPIS user tab content.
- * 
- * Not yet used, because we need to decide if/how we show areas on sub sites.
+ * Tab showing areas where user has access
  */
 
 // Exit if accessed directly
@@ -21,44 +19,39 @@ $user = wp_get_current_user();
 
 <?php
         wp_reset_postdata();        
-        // See what subsites the user has access to and fetch matching area posts by slug using this mapping:
-        $site_path_to_post_slug = array(
-            '/12845/' => 'bagarmossen',
-			'/12833/' => 'skarpnack',
-			// Add more mappings as needed
-        );
-
-        $allowed_post_slugs = array();
-        $user_blogs = get_blogs_of_user( $user_id );
-
-        foreach ( $user_blogs as $user_blog ) {
-            if ( isset( $site_path_to_post_slug[ $user_blog->path ] ) ) {
-                $allowed_post_slugs[] = sanitize_title( $site_path_to_post_slug[ $user_blog->path ] );
+        // Store blog IDs (database suffixes) for sites the current user can access.
+        $user_access_blog_ids = array();
+        if ( $user_id > 0 ) {
+            $user_blogs = get_blogs_of_user( $user_id, true );
+            foreach ( $user_blogs as $user_blog ) {
+                $site_blog_id = isset( $user_blog->userblog_id ) ? (int) $user_blog->userblog_id : 0;
+                if ( $site_blog_id > 0 && ! is_main_site( $site_blog_id ) ) {
+                    $user_access_blog_ids[] = $site_blog_id;
+                }
             }
         }
 
-        $allowed_post_slugs = array_values( array_unique( $allowed_post_slugs ) );
+        $user_access_blog_ids = array_values( array_unique( array_map( 'intval', $user_access_blog_ids ) ) );
 
-        if ( empty( $allowed_post_slugs ) ) {
-            $allowed_post_slugs = array( '__no_matching_area__' );
-        }
-
+        // Get posts with matching "area_blog_id" 
         $args = array(
             'post_type'      => 'post',
             'post_status'    => 'publish',
             'posts_per_page' => 50,
-            'orderby'        => 'post_name__in',
-            'post_name__in'  => $allowed_post_slugs,
+            'meta_query'     => array(
+                array(
+                    'key'     => 'area_blog_id',
+                    'value'   => ! empty( $user_access_blog_ids ) ? $user_access_blog_ids : array( 0 ),
+                    'compare' => 'IN',
+                    'type'    => 'NUMERIC',
+                ),
+            ),
         );
 
         $the_query = new WP_Query( $args );
         $count_total = 0;
         if ( $the_query->have_posts() ) {
             foreach ( $the_query->posts as $area_post ) {
-                if ( in_category( 'private', $area_post ) && ! current_user_can( 'manage_options' ) && ! current_user_can( 'loopis_admin' ) ) {
-                    continue;
-                }
-
                 $count_total++;
             }
         }
@@ -81,5 +74,7 @@ $user = wp_get_current_user();
 			<p>💢 Du är inte medlem i något område.</p>
             <?php } ?>
         </div><!--post-list-->
+
+        <p class="info">💡 Vi planerar att senare öppna för möjligheten att gå med i flera områden.</p>
 
         <?php wp_reset_postdata(); ?>

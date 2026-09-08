@@ -17,7 +17,6 @@ function member_pending_check($user_id) {
     $phone = (string) get_user_meta($user_id, 'wpum_phone', true);
     $birthyear = (string) get_user_meta($user_id, 'wpum_birthyear', true);
     $gender = (string) get_user_meta($user_id, 'wpum_gender', true);
-    $area = (string) get_user_meta($user_id, 'wpum_area', true);
     $active = (string) get_user_meta($user_id, 'wpum_active', true);
 
 
@@ -26,7 +25,6 @@ function member_pending_check($user_id) {
     $phone_digits = preg_replace('/\D+/', '', $phone);
     $birthyear_digits = preg_replace('/\D+/', '', $birthyear);
     $allowed_genders = array('female', 'male', 'nonbinary', 'other', 'secret');
-    $allowed_areas = array('1', '2', '3', '4', '5', 'other');
     $allowed_active = array('true', 'false', '1', '0', 'yes', 'no', 'on', 'off');
     $current_year = (int) wp_date('Y');
 
@@ -37,7 +35,6 @@ function member_pending_check($user_id) {
         && (int) $birthyear_digits >= 1900
         && (int) $birthyear_digits <= $current_year;
     $valid_gender = in_array($gender, $allowed_genders, true);
-    $valid_area = in_array($area, $allowed_areas, true);
     $valid_active = in_array(strtolower($active), $allowed_active, true);
 
     // Check if all member data is complete and valid
@@ -45,7 +42,6 @@ function member_pending_check($user_id) {
         && $valid_phone
         && $valid_birthyear
         && $valid_gender
-        && $valid_area
         && $valid_active) {
         $member_data_complete = true;
     }

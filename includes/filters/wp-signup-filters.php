@@ -1,8 +1,8 @@
 <?php
 /**
- * Filters and actions affecting multisite signup on /wp-signup.php
+ * Customized multisite signup on /wp-signup.php
  * 
- * Created by CoPilot, prompted by Johan.
+ * Created by CoPilot, prompted by Johan, complemented by Hubert.
  *
  * @package LOOPIS_Theme
  * @subpackage Frontend
@@ -15,7 +15,7 @@ if (!$loopis_is_signup_request) {
     return;
 }
 
-// Enqueue LOOPIS styles on /wp-signup.php only
+// Enqueue LOOPIS styles
 function loopis_theme_hq_signup_assets() {
     wp_enqueue_style('dashicons');
 
@@ -27,9 +27,9 @@ function loopis_theme_hq_signup_assets() {
 add_action('wp_enqueue_scripts', 'loopis_theme_hq_signup_assets');
 
 /**
- * Render our custom signup template from templates/wp-signup.
+ * Helper function to buffer custom content from templates/wp-signup.
  */
-function loopis_theme_hq_render_signup_template($template_file, $vars = array()) {
+function loopis_theme_hq_buffer_signup_template($template_file, $vars = array()) {
     $template = get_stylesheet_directory() . '/templates/wp-signup/' . ltrim((string) $template_file, '/');
     if (!file_exists($template)) {
         return '';
@@ -61,15 +61,39 @@ add_action('signup_header', 'loopis_theme_hq_hide_default_signup_heading');
 
 
 /**
- * Swap title block to verification stage once signup confirmation is shown.
+ * Open LOOPIS page wrapper and output custom signup title block.
+ */
+function loopis_theme_hq_signup_custom_header() {
+    echo '<div class="page-padding center">';
+    echo '<div id="loopis-signup-title">';
+    $template_html = loopis_theme_hq_buffer_signup_template('loopis-signup-title.php');
+    if ('' !== $template_html) {
+        echo $template_html;
+    }
+    echo '</div>';
+}
+add_action('before_signup_form', 'loopis_theme_hq_signup_custom_header');
+
+
+/**
+ * Close LOOPIS page wrapper.
+ */
+function loopis_theme_hq_signup_close_page_padding() {
+    echo '</div><!-- .page-padding center -->';
+}
+add_action('after_signup_form', 'loopis_theme_hq_signup_close_page_padding');
+
+
+/**
+ * Change to custom verification title block on signup confirmation.
  */
 function loopis_theme_hq_signup_activation_confirmation() {
     if ('wp-signup.php' !== ($GLOBALS['pagenow'] ?? '')) {
         return;
     }
 
-    $template_html = loopis_theme_hq_render_signup_template('loopis-verify-title.php');
-    if ('' === $template_html) {
+    $template_html = loopis_theme_hq_buffer_signup_template('loopis-verify-title.php');
+    if ( '' === $template_html ) {
         return;
     }
 
@@ -113,30 +137,6 @@ function loopis_theme_hq_signup_activation_confirmation() {
 }
 add_action('signup_finished', 'loopis_theme_hq_signup_activation_confirmation');
 
-
-/**
- * Output custom signup page header from isolated template, then open page-padding center wrapper.
- */
-function loopis_theme_hq_signup_custom_header() {
-    echo '<div class="page-padding center">';
-    echo '<div id="loopis-signup-title">';
-    $template_html = loopis_theme_hq_render_signup_template('loopis-signup-title.php');
-    if ('' !== $template_html) {
-        echo $template_html;
-    }
-    echo '</div>';
-}
-add_action('before_signup_form', 'loopis_theme_hq_signup_custom_header');
-
-/**
- * Close the page-padding center wrapper opened before the signup form.
- */
-function loopis_theme_hq_signup_close_page_padding() {
-    echo '</div><!-- .page-padding center -->';
-}
-add_action('after_signup_form', 'loopis_theme_hq_signup_close_page_padding');
-
-
 /**
  * Render first and last name fields on /wp-signup.php
  */
@@ -166,7 +166,7 @@ function loopis_theme_hq_signup_extra_name_fields() {
 add_action('signup_extra_fields', 'loopis_theme_hq_signup_extra_name_fields');
 
 /**
- * Return private multisite locations.
+ * Return private subsites (areas).
  */
 function loopis_theme_hq_get_private_sites() {
     global $wpdb;
@@ -183,7 +183,7 @@ function loopis_theme_hq_get_private_sites() {
 }
 
 /**
- * Return selectable multisite locations.
+ * Return selectable subsites (areas).
  */
 function loopis_theme_hq_get_signup_locations() {
     if ( ! is_multisite() ) {
@@ -207,7 +207,7 @@ function loopis_theme_hq_get_signup_locations() {
 }
 
 /**
- * Check whether a blog ID is an allowed signup location.
+ * Check whether a subsite is an allowed signup area.
  */
 function loopis_theme_hq_is_valid_signup_location( $blog_id ) {
     $blog_id = absint( $blog_id );
@@ -233,6 +233,9 @@ function loopis_theme_hq_is_valid_signup_location( $blog_id ) {
     return true;
 }
 
+/**
+ * Check whether the special invite cookie is set.
+ */
 function loopis_theme_hq_has_special_location_cookie() {
     return isset( $_COOKIE['special_invite_payload'] );
 }
@@ -261,7 +264,7 @@ function loopis_theme_hq_get_location_safe() {
 }
 
 /**
- * Render location selector on the signup form.
+ * Render area selector on the signup form.
  */
 function loopis_theme_hq_signup_location_field() {
     if ( loopis_theme_hq_has_special_location_cookie() ) {
@@ -274,7 +277,7 @@ function loopis_theme_hq_signup_location_field() {
 
     <p>
         <label for="loopis_location_blog_id">
-            <?php esc_html_e( 'Location', 'loopis-theme-hq' ); ?>
+            <?php esc_html_e( 'Område', 'loopis-theme-hq' ); ?>
         </label>
 
         <select
@@ -283,7 +286,7 @@ function loopis_theme_hq_signup_location_field() {
             required
         >
             <option value="">
-                <?php esc_html_e( 'Select a location', 'loopis-theme-hq' ); ?>
+                <?php esc_html_e( 'Välj ditt område', 'loopis-theme-hq' ); ?>
             </option>
 
             <?php foreach ( $locations as $location ) : ?>
@@ -309,6 +312,7 @@ add_action(
     'signup_extra_fields',
     'loopis_theme_hq_signup_location_field'
 );
+
 /**
  * Hide the default username input and keep it auto-generated in the form.
  */
@@ -457,21 +461,31 @@ function loopis_theme_hq_signup_username_ui_bridge() {
 add_action('wp_head', 'loopis_theme_hq_signup_username_ui_bridge');
 
 /**
- * Build a username from first and last name.
+ * Build a username from first name and last name.
  *
- * Format: Firstname-Lastname
+ * Format: firstname-lastname
  */
 function loopis_theme_hq_build_signup_username($first_name, $last_name) {
-    // safe strings
+    // Clean incoming values from unsafe characters.
     $first_name = sanitize_text_field($first_name);
     $last_name = sanitize_text_field($last_name);
 
-    $raw = remove_accents($first_name . '-' . $last_name); //no special lettering or fancy accent
-    $raw = preg_replace('/\s+/', '-', $raw); //ensure bonus names and hyphens are connected with the right character
+    // Join names with a hyphen and normalize accented letters (e.g. å -> a).
+    $raw = remove_accents($first_name . '-' . $last_name);
+
+    // Replace any whitespace runs with a single hyphen.
+    $raw = preg_replace('/\s+/', '-', $raw);
+
+    // Collapse repeated hyphens to keep the slug clean.
     $raw = preg_replace('/-+/', '-', $raw);
-    $raw = trim($raw, '-'); // fix ends
-    $raw = ucwords(strtolower($raw), '-'); //all letters small except first and after -
+
+    // Remove leading and trailing hyphens.
+    $raw = trim($raw, '-');
+
+    // Force lowercase for consistent usernames.
+    $raw = strtolower($raw);
     
+    // Apply WordPress username sanitization rules.
     return sanitize_user($raw, true);
 }
 
@@ -502,9 +516,9 @@ function loopis_theme_hq_is_signup_username_taken($username) {
 }
 
 /**
- * Generate first available username from first/last name.
+ * Build a standardized username with numerical suffix if needed.
  *
- * Format: firstname-lastname, then firstname-lastname-2, -3, ...
+ * Format: firstname-lastname (-2, -3, ... )
  */
 function loopis_theme_hq_generate_available_signup_username($first_name, $last_name) {
     $base_username = loopis_theme_hq_build_signup_username($first_name, $last_name);
@@ -817,12 +831,8 @@ function loopis_theme_hq_add_activated_user_to_main_site(
     }
 
     $user_id = (int) $user_id;
-
-    $main_site_id = function_exists( 'get_main_site_id' )
-        ? (int) get_main_site_id()
-        : 1;
-    //hardcoded to handle registrations from before changes
-    $selected_blog_id = 2;
+    $main_site_id = 1;
+    $selected_blog_id = 2; // Select Bagarmossen for earlier registrations without area selection
 
     if ( is_array( $meta ) && ! empty( $meta['loopis_location_blog_id'] ) ) {
         $selected_blog_id = absint( $meta['loopis_location_blog_id'] );

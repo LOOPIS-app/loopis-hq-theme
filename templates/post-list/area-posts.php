@@ -1,6 +1,8 @@
 <?php
 /**
- * Template part for displaying big area posts in list view.
+ * Template for displaying available subsites using blog posts.
+ * 
+ * Posts with category 'private' are only shown to users with access to that subsite.
  */
 
 if (!defined('ABSPATH')) {
@@ -20,18 +22,8 @@ if (in_category('private') && !$can_access_private_area) {
 // Set post opacity style for private posts
 $post_opacity_style = in_category('private') ? ' style="opacity: 0.6; filter: grayscale(100%);"' : '';
 
-// Count total posts in the list
-if (!isset($count_total)) {
-    $count_total = 0;
-}
-$count_total++;
-
 // Get variables
 $area_city = get_post_meta(get_the_ID(), 'area_city', true) ?: 'Stad saknas';
-$area_launch_date = get_post_meta(get_the_ID(), 'area_launch_date', true) ?: 'Lanseringsdatum saknas';
-$locker_postal_code = get_post_meta(get_the_ID(), 'locker_postal_code', true) ?: 'Postnummer saknas';
-$locker_address = get_post_meta(get_the_ID(), 'locker_address', true) ?: 'Adress saknas';
-$locker_link = get_post_meta(get_the_ID(), 'locker_link', true) ?: '#';
 
 // Count subsite members
 include_once LOOPIS_THEME_HQ_DIR . '/includes/functions/visitor-extra/subsite-member-count.php';

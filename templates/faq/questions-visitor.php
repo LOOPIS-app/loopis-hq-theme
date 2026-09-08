@@ -8,13 +8,11 @@
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }   
-
-$faq_url = home_url( '/faq/' );
 ?>
 
 <div class="columns"><div class="column1"><h5>💡 Vanliga frågor</h5></div>
-<div class="column2"><a href="<?php echo esc_url($faq_url);?>">Alla frågor & svar →</a></div></div>
+<div class="column2"><a href="<?php echo esc_url(home_url('/faq/'));?>">Alla frågor & svar →</a></div></div>
 <hr>
-<p><span class="big-link"><a href="<?php echo esc_url($faq_url . 'hur-funkar-loopis/');?>">📌 Hur funkar LOOPIS?</a></span></p>
-<p><span class="big-link"><a href="<?php echo esc_url($faq_url . 'varfor-medlemskap/');?>">📌 Varför måste jag vara medlem?</a></span></p>
-<p><span class="big-link"><a href="<?php echo esc_url($faq_url . 'varfor-bagis/');?>">📌 Varför måste jag bo i Bagis?</a></span></p>
+<p><span class="big-link"><a href="<?php echo esc_url(home_url('/faq/hur-funkar-loopis/'));?>">📌 Hur funkar LOOPIS?</a></span></p>
+<p><span class="big-link"><a href="<?php echo esc_url(home_url('/faq/var-finns-loopis/'));?>">📌 Var finns LOOPIS?</a></span></p>
+<p><span class="big-link"><a href="<?php echo esc_url(home_url('/faq/varfor-medlemskap/'));?>">📌 Varför medlemskap?</a></span></p>
