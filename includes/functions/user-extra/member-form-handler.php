@@ -40,7 +40,6 @@ function loopis_theme_hq_handle_member_form_post() {
     $phone_raw = sanitize_text_field(wp_unslash($_POST['wpum_phone'] ?? ''));
     $birthyear_raw = sanitize_text_field(wp_unslash($_POST['wpum_birthyear'] ?? ''));
     $gender = sanitize_key(wp_unslash($_POST['wpum_gender'] ?? ''));
-    $area = sanitize_key(wp_unslash($_POST['wpum_area'] ?? ''));
     
     $active = isset($_POST['wpum_active']) ? 'true' : 'false';
 
@@ -79,10 +78,6 @@ function loopis_theme_hq_handle_member_form_post() {
             $invalid_fields[] = 'wpum_gender';
         }
                 
-        if (!$is_valid_area) {
-            $invalid_fields[] = 'wpum_area';
-        }
-
         // Persist fields that passed validation to avoid unnecessary refilling.
         if ($is_valid_postcode) {
             update_user_meta($user_id, 'wpum_postcode', $postcode);
@@ -101,10 +96,6 @@ function loopis_theme_hq_handle_member_form_post() {
             update_user_meta($user_id, 'wpum_gender', $gender);
         }
 
-        if ($is_valid_area) {
-            update_user_meta($user_id, 'wpum_area', $area);
-        }
-
         update_user_meta($user_id, 'wpum_active', $active);
 
         wp_safe_redirect(add_query_arg(array(
@@ -121,7 +112,6 @@ function loopis_theme_hq_handle_member_form_post() {
     update_user_meta($user_id, 'wpum_phone', $phone);
     update_user_meta($user_id, 'wpum_birthyear', $birthyear);
     update_user_meta($user_id, 'wpum_gender', $gender);
-    update_user_meta($user_id, 'wpum_area', $area);
     update_user_meta($user_id, 'wpum_active', $active);
     // Check if both member data and membership payment are complete.
     if(!function_exists('member_pending_check')) {

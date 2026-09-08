@@ -31,17 +31,17 @@ wp_enqueue_script('loopis-tabs', LOOPIS_THEME_URI . '/assets/js/tabs.js', array(
 <!-- Tab Content -->
 <div class="tab-content">
 
-  <!-- SETTINGS -->
+  <!-- Tab: Settings -->
   <div id="tab-settings" class="tab-panel">
     <?php include_once __DIR__ . '/tabs/settings.php'; ?>
   </div>
 
-  <!-- AREAS -->
+  <!-- Tab: Areas -->
   <div id="tab-areas" class="tab-panel">
     <?php include_once __DIR__ . '/tabs/areas.php'; ?>
   </div>
   
-  <!-- ACTIVITY -->
+  <!-- Tab: Activity -->
   <div id="tab-activity" class="tab-panel">
     <?php include_once __DIR__ . '/tabs/activity.php'; ?>
   </div>
