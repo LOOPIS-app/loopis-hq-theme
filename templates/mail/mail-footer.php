@@ -9,17 +9,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-<?php
-/**
- * Standard LOOPIS mail footer for admin/user.
- * 
- * @return string HTML footer
- */
-
-if (!defined('ABSPATH')) {
-    exit;
-}
-
 function loopis_mail_footer(string $text = ''): string {
     if ($text === 'manager') {
         $icon = LOOPIS_THEME_URI . '/assets/img/LOOPIS_icon_admin.png';

@@ -1,18 +1,5 @@
 <?php
 /**
- * Standard mail content template.
- * 
- * @param string $mail_intro The introductory text for the mail
- * @param string $mail_outro The concluding text for the mail
- * @param string $post_content The content of the post
- * @return string HTML wrapped content
- */
-
-if (!defined('ABSPATH')) {
-    exit;
-}
-<?php
-/**
  * Support notification mail content template.
  * 
  * @param string $mail_intro The introductory text for the mail
@@ -42,7 +29,7 @@ function loopis_mail_template(string $mail_intro='', string|array $mail_outro=''
     if(!empty($mail_outro)){
         $mail .= '<p style="font-size: 14px">' . $mail_outro . '</p>';
     }
-    return $mail
+    return $mail;
 }
 
 function loopis_mail_template_outro_array(array $outro_entries){
