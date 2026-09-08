@@ -31,7 +31,7 @@ if (!defined('ABSPATH')) {
 
 <h3>Delning</h3>
 <hr>
-<p>LOOPIS delar inte ut dina personuppgifter till några andra organisationer eller företag.</p>
+<p>LOOPIS delar aldrig ut dina personuppgifter till några andra organisationer eller företag.</p>
 
 <h3>Lagring</h3>
 <hr>
@@ -39,16 +39,16 @@ if (!defined('ABSPATH')) {
 
 <h3>Radering</h3>
 <hr>
-<p>För att få dina personuppgifter raderade mailar du en förfrågan till <a href="mailto:info@loopis.org">info@loopis.org</a>. Du får då en bekräftelse på att de raderats. Observera att dina innestående regnbågsmynt då också försvinner.</p>
+<p>För att få dina personuppgifter, maila <span class="big-link"><a href="mailto:info@loopis.org">✉ info@loopis.org</a></span>. Du får då en bekräftelse på att de raderats. Observera att ditt användarkonto och dina innestående regnbågsmynt då också försvinner.</p>
 
 <h3>Text och bild</h3>
 <hr>
-<p>Text och bild som du publicerar på LOOPIS.app i form av annonser och kommentarer sparas utan tidsgräns. Om du begär att få dina personuppgifter raderade kommer dina annonser och kommentarer att anonymiseras. </p>
+<p>Text och bild som du publicerar på LOOPIS.app i form av annonser och kommentarer sparas utan tidsgräns. Om du begär att få dina personuppgifter raderade kommer dina annonser och kommentarer att anonymiseras.</p>
 
-<h3>Kontakt & klagomål</h3>
+<h3>Kontakt och klagomål</h3>
 <hr>
-<p>Det är den ideella föreningen LOOPIS (org.nr 802542-2117) som ansvarar för lagringen av dina personuppgifter. Om du har frågor, synpunkter eller klagomål kan du kontakta föreningen på <a href="mailto:info@loopis.org">info@loopis.org</a>.&nbsp;Ansvarig myndighet när det gäller klagomål är <a href="https://www.imy.se/privatperson/utfora-arenden/lamna-ett-klagomal/" target="_blank" rel="noreferrer noopener">Integritetsskyddsmyndigheten</a>.</p>
+<p>Det är den ideella föreningen LOOPIS (org.nr 802542-2117) som ansvarar för lagringen av dina personuppgifter. Om du har frågor, synpunkter eller klagomål kan du kontakta föreningen på <span class="big-link"><a href="mailto:info@loopis.org">✉ info@loopis.org</a></span>. Ansvarig myndighet när det gäller klagomål är <a href="https://www.imy.se/privatperson/utfora-arenden/lamna-ett-klagomal/" target="_blank" rel="noreferrer noopener">Integritetsskyddsmyndigheten</a>.</p>
 
 <h3>Ändringar</h3>
 <hr>
-<p>LOOPIS reserverar sig mot ändringar i denna policy om det anses nödvändigt.</p>
+<p>LOOPIS reserverar sig mot ändringar i denna policy utifrån beslut på föreningens årsmöte.</p>
