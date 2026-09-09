@@ -27,7 +27,7 @@ function loopis_mail_footer(string $text = ''): string {
         . '<tr>'
         . '<td style="padding: 5px 5px 0 0"><img style="height: 32px" src="' . esc_url($icon) . '" alt="LOOPIS_icon" /></td>'
         . '<td style="padding: 5px 10px 0 0">'
-        . '<p style="font-size: 11px;font-style: italic;margin: 0;line-height: 1.2">' . esc_html($text) . '</p>'
+        . '<p style="font-size: 11px;font-style: italic;margin: 0;line-height: 1.2">' . $text . '</p>'
         . '</td>'
         . '</tr>'
         . '</tbody>'
