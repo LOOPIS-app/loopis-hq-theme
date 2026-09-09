@@ -1,7 +1,7 @@
 <?php
 /**
- * Standard LOOPIS mail footer.
- *
+ * Standard LOOPIS mail footer
+ * 
  * @return string HTML footer
  */
 
@@ -10,11 +10,17 @@ if (!defined('ABSPATH')) {
 }
 
 function loopis_mail_footer(string $text = ''): string {
-    if ($text === '') {
-        $text = 'Detta är ett mail från LOOPIS.app';
+    if ($text === 'manager') {
+        $icon = LOOPIS_THEME_URI . '/assets/img/LOOPIS_icon_admin.png';
+        $text = 'Notifikation till admin på ' . get_bloginfo('name') . '.';
+    } elseif(!empty($text)){
+        $icon = LOOPIS_THEME_URI . '/assets/img/LOOPIS_icon.png';
+    } else {
+        $icon = LOOPIS_THEME_URI . '/assets/img/LOOPIS_icon.png';
+        $text = 'Ett mail från LOOPIS.app';
     }
 
-    $icon = LOOPIS_THEME_HQ_URI . '/assets/img/LOOPIS_icon.png';
+    // $text='Information från <a href="/">LOOPIS.app</a> <br> angående ditt användarkonto.'
 
     $html = '<table style="border-collapse: collapse;border-top: 1px solid">'
         . '<tbody>'

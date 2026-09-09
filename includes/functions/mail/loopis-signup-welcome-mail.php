@@ -11,9 +11,11 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-require_once get_template_directory() . '/templates/mail/mail-template.php';
 
 function loopis_signup_welcome_mail(string $first_name = '', string $username = '', string $password = ''): string {
+    if(!function_exists('loopis_mail_template')){
+        include_once  LOOPIS_THEME_HQ_DIR . '/includes/functions/mail/loopis-mail-template.php';
+    }
     $first_name = sanitize_text_field($first_name);
     $username = sanitize_user($username, true);
     $password = sanitize_text_field($password);

@@ -11,10 +11,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-require_once get_template_directory() . '/templates/mail/mail-template.php';
-
 function loopis_signup_activation_mail(string $first_name = '', string $activation_url = ''): string {
-    
+    if(!function_exists('loopis_mail_template')){
+        include_once  LOOPIS_THEME_HQ_DIR . '/includes/functions/mail/loopis-mail-template.php';
+    }
     $first_name = sanitize_text_field($first_name);
     $activation_url = esc_url($activation_url);
 

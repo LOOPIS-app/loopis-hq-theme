@@ -11,9 +11,9 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-require_once get_template_directory() . '/templates/mail/mail-template.php';
-require_once get_template_directory() . '/templates/mail/mail-headers.php';
-require_once get_template_directory() . '/templates/mail/mail-footer.php';
+include_once  LOOPIS_THEME_HQ_DIR . '/includes/functions/mail/loopis-mail-footer.php';
+include_once  LOOPIS_THEME_HQ_DIR . '/includes/functions/mail/loopis-mail-template.php';
+include_once  LOOPIS_THEME_HQ_DIR . '/includes/functions/mail/loopis-mail-headers.php';
 
 function admin_action_add_membership(int $user_id) {
     if ($user_id === 0) {
