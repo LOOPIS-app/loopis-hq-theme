@@ -1,0 +1,49 @@
+<?php
+/**
+ * Profile page tabs.
+ * 
+ * Dynamic content of page-profile.php
+ * Reached on /profile
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+// Get current user iD
+$user_id = get_current_user_id();
+$user = wp_get_current_user();
+
+// Enqueue tabs script
+wp_enqueue_script('loopis-tabs', LOOPIS_THEME_URI . '/assets/js/tabs.js', array(), '1.0.0', true);
+?>
+
+<!-- Tab Navigation -->
+<div class="tab-nav">
+  <nav class="tab-navbar">
+    <a href="#" class="tab-link" data-tab="tab-settings">⚙</a>
+    <a href="#" class="tab-link" data-tab="tab-areas">📍</a>
+    <a href="#" class="tab-link" data-tab="tab-activity">🧮</a>
+    
+  </nav>
+</div><!--tab-nav-->
+
+<!-- Tab Content -->
+<div class="tab-content">
+
+  <!-- Tab: Settings -->
+  <div id="tab-settings" class="tab-panel">
+    <?php include_once __DIR__ . '/tabs/settings.php'; ?>
+  </div>
+
+  <!-- Tab: Areas -->
+  <div id="tab-areas" class="tab-panel">
+    <?php include_once __DIR__ . '/tabs/areas.php'; ?>
+  </div>
+  
+  <!-- Tab: Activity -->
+  <div id="tab-activity" class="tab-panel">
+    <?php include_once __DIR__ . '/tabs/activity.php'; ?>
+  </div>
+
+</div><!--tab-content-->

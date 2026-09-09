@@ -1,0 +1,23 @@
+<?php
+/**
+ * Block for routing user to FAQ on faq post
+ *
+ * Included in single-faq.php and archive-faq.php
+ */
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+?>
+
+<div class="admin-block">
+    <?php include_once LOOPIS_THEME_HQ_DIR . '/templates/links/developer-link.php' ?>
+    <h5>⚠ Sidan är i testläge</h5>
+    <hr>
+    <p class="small">💳 Använd kortnummer "4242 4242 4242 4242" för att simulera en betalning med Stripe sandbox.</p>
+    <p class="small">💡 Du kan också skippa betalning och använda knappen nedan.</p>
+
+    <?php if(isset($_POST['activate'])) { add_membership(); refresh_page(); } ?>
+		<form method="post" class="arb" action=""><button name="activate" type="submit" class="purple small">Ge mig medlemskap</button></form>
+		<p class="info">Aktivera medlemskapet för test.</p>
+</div>
