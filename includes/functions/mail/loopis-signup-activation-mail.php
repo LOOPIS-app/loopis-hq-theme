@@ -12,15 +12,15 @@ if (!defined('ABSPATH')) {
 }
 
 function loopis_signup_activation_mail(string $first_name = '', string $activation_url = ''): string {
+    if(!function_exists('loopis_mail_template')){
+        include_once  LOOPIS_THEME_HQ_DIR . '/includes/functions/mail/loopis-mail-template.php';
+    }
     $first_name = sanitize_text_field($first_name);
     $activation_url = esc_url($activation_url);
 
     $greeting = '' !== $first_name ? 'Hej ' . esc_html($first_name) : 'Hej';
+    $content ='Tryck på länken för att bekräfta din e-postadress:<br> <a href="' . $activation_url . '">' . esc_html($activation_url) . '</a>';
+    $outro = 'När ditt konto är aktiverat får du ett nytt mail med inloggningsuppgifter.';
 
-    return '<h3>' . $greeting . '</h3>'
-        . '<p style="padding: 10px;font-size: 18px;font-style: italic;background: #f5f5f5;border-radius: 10px">'
-        . 'Tryck på länken för att bekräfta din e-postadress:<br>'
-        . '<a href="' . $activation_url . '">' . esc_html($activation_url) . '</a>'
-        . '</p>'
-        . '<p>När ditt konto är aktiverat får du ett nytt mail med inloggningsuppgifter.</p>';
+    return loopis_mail_template($greeting, $outro, $content);
 }

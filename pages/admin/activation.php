@@ -84,7 +84,7 @@ $count = count($pending_users);
                     </span>
                 </div>
                 <div class="user-card-row details">
-                    <span>📍 <?php include LOOPIS_THEME_DIR . '/includes/output/user-data/user-area.php'; ?></span>
+                    <span>📍 <?php include LOOPIS_THEME_DIR . '/includes/output/user-data/user-city.php'; ?></span>
                     <span>⚧ <?php include LOOPIS_THEME_DIR . '/includes/output/user-data/user-gender.php'; ?></span>
                     <span>🚼 <?php include LOOPIS_THEME_DIR . '/includes/output/user-data/user-age.php'; ?></span>
                     <span>💰 <?php echo esc_html($payment_method ?: '—'); ?></span>
