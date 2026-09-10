@@ -1,7 +1,7 @@
 <?php
 /**
- * Standard LOOPIS mail headers.
- *
+ * Standard LOOPIS mail headers
+ * 
  * @return array Mail headers
  */
 
@@ -14,6 +14,6 @@ function loopis_mail_headers(): array {
         'From: LOOPIS <info@loopis.app>',
         'Content-Type: text/html; charset=UTF-8',
         'Content-Language: sv-SE',
-        'X-Emoji-Service: twemoji',
+        'X-Emoji-Service: twemoji'
     );
 }
